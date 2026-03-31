@@ -1,0 +1,69 @@
+---
+title: "Referral program"
+description: "Invite other agents to SmartBugMedia using your Node ID and earn 20% of their daily optimization profits indefinitely."
+---
+
+The SmartBugMedia referral program lets you grow your earnings by building a network of agents. Every agent you invite generates a passive 20% bonus on top of their daily task profits — credited directly to your wallet each day they are active.
+
+## How it works
+
+When a new user registers using your referral code, their account is permanently linked to yours via the `referred_by` field on their profile. From that point forward:
+
+1. The referred agent completes optimization tasks and earns daily profits.
+2. SmartBugMedia automatically calculates 20% of their daily profit.
+3. That amount is added to your `referral_earned` balance and credited to your wallet.
+
+There is no cap on the number of agents you can refer, and the 20% yield applies for as long as the referred agent remains active on the platform.
+
+<Note>
+  Referral earnings are based on your referred agents' **daily optimization profits** — the commission they earn from completing tasks. They are not affected by your referred agents' deposits, withdrawals, or wallet balances.
+</Note>
+
+## Finding your referral code
+
+Your referral code is your unique **Node ID** — the same identifier that appears on your profile. You can find it in two places:
+
+- **Dashboard header** — the Node ID badge is shown next to your username at the top of the home screen. Click it to copy the code.
+- **Profile page** — the **Secure Access Token** widget under your username on the profile page displays your code. Click it to copy.
+
+Your Node ID is a short alphanumeric code (for example: `A3F2`). It is generated when your account is created and never changes.
+
+## Sharing your referral link
+
+You can share a referral link directly with anyone. The link format uses the `?ref=` query parameter followed by your Node ID. When someone opens the sign-up page with this link, their invitation code field is filled in automatically.
+
+Your referral link follows this format:
+
+```
+[platform-url]/register?ref=XXXX
+```
+
+Replace `XXXX` with your Node ID. Find your Node ID in the dashboard header or on your profile page. You can share the link via messaging apps, social media, email, or any other channel.
+
+<Tip>
+  When you share your link, the recipient's invitation code field is filled in automatically. Make sure they complete registration using that link to ensure the referral is properly recorded.
+</Tip>
+
+## Tracking your referral earnings
+
+<CardGroup cols={2}>
+  <Card title="Referral bonus balance" icon="network-wired" href="/account/profile">
+    The **Referral bonus** figure on your profile and dashboard shows your total `referral_earned` — the cumulative amount credited to your wallet from all referred agents' daily profits.
+  </Card>
+  <Card title="Referred agents count" icon="users" href="/account/profile">
+    Your profile tracks `referred_users_count` — the total number of agents who registered using your Node ID. This figure is visible in your profile statistics.
+  </Card>
+</CardGroup>
+
+For a full breakdown of individual transactions including referral credits, check your transaction history at **Records → Task History**.
+
+## Tips for growing your network
+
+- **Share your referral link directly** — a personal message explaining how the platform works converts better than a plain link.
+- **Help new agents get started** — agents who successfully fund their wallet and complete their first tasks become long-term earners in your network.
+- **Refer active earners** — your referral bonus scales with how much your referred agents earn, so agents who consistently complete daily tasks generate the most passive income for you.
+- **Monitor your network size** — keep an eye on your `referred_users_count` to understand how your network is growing over time.
+
+<Warning>
+  Creating multiple accounts to refer yourself, or using fraudulent methods to inflate referral counts, violates the SmartBugMedia terms of service and will result in account suspension. See [Platform rules](/platform/rules) for the full compliance policy.
+</Warning>

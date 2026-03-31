@@ -1,0 +1,67 @@
+---
+title: "Admin Overview"
+description: "A guide to the SmartBugMedia admin panel: who uses it, how to access it, and what each section controls."
+---
+
+The admin panel is the back-office control center for the SmartBugMedia platform. It gives authorized staff full visibility into platform activity and the tools to manage users, financial transactions, task inventory, VIP tiers, bundles, notifications, and global settings.
+
+## Who should use the admin panel
+
+Only accounts with `role: 'admin'` can access the admin panel. Standard user accounts are automatically redirected away. Assign admin access carefully — admin accounts have the ability to modify balances, approve or reject financial transactions, and change platform-wide settings that affect all users.
+
+## How to access
+
+Navigate to `/admin` after signing in with an admin account. If your account does not have `role: 'admin'` set in the database, you will not be able to access any admin routes.
+
+<Note>
+Admin role is stored as `role: 'admin'` on the user's profile record. This must be set directly in the database or via the Users admin page by another admin.
+</Note>
+
+## Dashboard overview
+
+The admin dashboard (`/admin`) loads a live summary of platform activity, including:
+
+- **Today's profit** — net revenue generated across the platform today
+- **Today's volume** — total transaction value processed today
+- **Today's tasks** — number of task completions recorded today
+- **Total users** — all registered accounts
+
+Below the headline stats, the dashboard displays pending action alerts for deposits and withdrawals that require review. A secondary stats grid shows quick counts for VIP levels, task items, referrals, and bundles.
+
+The bottom of the dashboard shows a **Recent Transactions** table with the last 8 transactions across all users.
+
+## Admin sections
+
+<CardGroup cols={2}>
+  <Card title="User management" icon="users" href="/admin/users">
+    View, search, edit, and manage all user accounts. Handle verification, balance adjustments, and per-user overrides.
+  </Card>
+  <Card title="Task management" icon="grid-3x3" href="/admin/tasks">
+    Manage the task item pool — create, edit, activate, deactivate, and bulk-generate product tasks by VIP tier.
+  </Card>
+  <Card title="Transactions" icon="dollar-sign" href="/admin/transactions">
+    View and manage all platform transactions including deposits, withdrawals, and commissions.
+  </Card>
+  <Card title="VIP levels" icon="layers" href="/admin/levels">
+    Configure VIP tier pricing, commission rates, task quotas, and badge colors.
+  </Card>
+  <Card title="Platform settings" icon="settings" href="/admin/settings">
+    Control site-wide toggles (maintenance mode, registrations, deposits, withdrawals), financial parameters, and branding.
+  </Card>
+  <Card title="Notifications" icon="bell" href="/admin/notifications">
+    Send platform-wide push notifications to all users and review the broadcast history.
+  </Card>
+  <Card title="Bundle management" icon="package" href="/admin/bundles">
+    Create and assign bundled package orders — special high-value tasks that appear mid-set for targeted users.
+  </Card>
+</CardGroup>
+
+## Access requirements
+
+- The user's `role` field must be `'admin'` in the `profiles` table.
+- Admin users bypass user-level restrictions on task flow and account actions.
+- All admin actions are performed under the authenticated admin's session. Certain operations (such as transaction processing) record a `processed_by` field for audit purposes.
+
+<Warning>
+Admin accounts have the ability to irreversibly modify user balances, approve financial transactions, and delete account data. Only grant admin access to trusted staff.
+</Warning>

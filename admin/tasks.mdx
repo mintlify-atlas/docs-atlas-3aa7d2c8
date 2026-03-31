@@ -1,0 +1,99 @@
+---
+title: "Task management"
+description: "How to manage the task item pool in the SmartBugMedia admin panel, including creating, editing, activating, and bulk-generating task items by VIP tier."
+---
+
+The Tasks page (`/admin/tasks`) manages the product catalog that powers the platform's task optimization grid. Users work through sets of task items (products) to earn commissions. This page controls what items are in the pool, which VIP tier they belong to, and whether they are active.
+
+## What task items are
+
+Each task item represents a product that appears in the task grid when a user runs a set. Users review products one at a time, and each completed task earns a commission based on their VIP tier's `commission_rate`. Task items have the following key fields:
+
+| Field        | Type      | Description                                               |
+| ------------ | --------- | --------------------------------------------------------- |
+| `title`      | string    | Product name shown in the task grid                       |
+| `image_url`  | string    | Product image displayed to the user                       |
+| `description`| string    | Short product description                                 |
+| `category`   | string    | Product category (`electrical`, `furniture`, `gym`, `fashion`, `automotive`, `general`) |
+| `level_id`   | number    | VIP tier this item belongs to (links to `levels.id`)      |
+| `is_active`  | boolean   | Whether this item appears in active task sets             |
+| `created_at` | timestamp | When the item was added                                   |
+
+## Viewing the task pool
+
+The page loads all task items from the database and displays them as product cards. The header stats show:
+
+- **Global catalog** — total items across all tiers
+- **Filtered** — items visible under the current filter
+- **Asset pool** — available product images from the product pool API
+- **Active levels** — number of configured VIP tiers
+
+## Filtering and searching
+
+Use the search bar to find items by title, category, or level. Use the **VIP Level** dropdown to filter items to a specific tier. When a specific level is selected, an additional **Set** filter appears to view the exact items that would appear in a given set number for that tier.
+
+## Creating a new task item
+
+Click **New product** to expand the creation form. Fill in the required fields:
+
+| Field        | Required | Notes                                                       |
+| ------------ | -------- | ----------------------------------------------------------- |
+| `title`      | Yes      | Product name                                                |
+| `category`   | Yes      | Select from the available categories                        |
+| `level_id`   | Yes      | Assign to a VIP tier                                        |
+| `description`| No       | Product description text                                    |
+| `image_url`  | No       | Image URL; auto-generated from the asset pool if left blank |
+
+Click **Commit to matrix** to save the item.
+
+<Note>
+If you leave the image URL blank, the system will automatically assign a product image from the asset pool based on the item title.
+</Note>
+
+The API for creating tasks via `POST /api/tasks` (used for programmatic creation) accepts these fields in the request body:
+
+```json
+{
+  "title": "string",
+  "description": "string",
+  "reward": "number",
+  "image_url": "string",
+  "category": "string",
+  "difficulty": "easy | medium | hard"
+}
+```
+
+This endpoint requires the authenticated user to have `is_admin: true` in their metadata.
+
+## Editing existing task items
+
+Each product card has a **Modify identity** button and a pencil icon (visible on hover). Click either to open the edit modal. You can update all fields including the title, category, VIP tier assignment, description, and image URL.
+
+Click **Save** to apply changes.
+
+## Activating and deactivating tasks
+
+Each task item has an `is_active` flag. Inactive items are grayed out in the catalog and will not appear in user task sets.
+
+To toggle a task's active state, hover over the item card and click the eye icon (active) or crossed-eye icon (inactive) in the image overlay. The state changes immediately.
+
+## Assigning tasks to VIP tiers
+
+Task items are tied to a specific VIP tier via the `level_id` field. When a user runs a task set, the system pulls items assigned to their current level. Set the `level_id` when creating or editing a task item to control which tier's users see it.
+
+## Bulk task generation
+
+The task page includes two bulk generation tools for quickly populating the catalog:
+
+**Auto-sync (global)** — Generates the full complement of task items for every VIP tier at once. The item count per level is calculated as `tasks_per_set × sets_per_day` for each tier. Existing items are purged first, then replaced with freshly generated items. Products are categorized by tier:
+
+- Level 1: electrical products
+- Level 2: furniture products
+- Level 3: gym and fashion products
+- Level 4: automotive and electrical products
+
+**Deploy units (per level)** — With a specific VIP level selected from the filter dropdown, use the set counter and **Deploy units** button to generate items for that level only. Set the number of sets to generate (1–50), and the system creates `tasks_per_set × sets_to_generate` items for that tier, clearing existing items for that level first.
+
+<Warning>
+The **Purge** button permanently deletes all task items across all tiers. This cannot be undone and will immediately affect users who are mid-set.
+</Warning>

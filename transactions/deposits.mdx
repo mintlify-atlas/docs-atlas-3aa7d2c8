@@ -1,0 +1,97 @@
+---
+title: "Depositing funds"
+description: "Add USDT to your SmartBugMedia wallet to start completing tasks and unlock higher tier levels."
+---
+
+Deposits fund your wallet balance with USDT. You need a funded wallet before you can start completing tasks or upgrade to a higher tier. All deposits are reviewed and approved by an administrator before your balance updates.
+
+## Supported networks
+
+SmartBugMedia accepts deposits on four networks:
+
+| Network label | Internal code | Asset sent |
+|---------------|---------------|------------|
+| USDT-TRC20 | TRX | USDT (Tron network) |
+| USDT-BEP20 | BEP20 | USDT (BNB Smart Chain) |
+| ETH | ERC20 | ETH (Ethereum network) |
+| BTC | BTC | BTC (Bitcoin network) |
+
+<Warning>
+Only send the asset that matches the selected network. For example, send USDT only on TRC20 or BEP20; ETH only on ERC20; BTC only to the BTC address. Sending the wrong asset to an address results in permanent loss of funds.
+</Warning>
+
+## Minimum deposit amounts
+
+Your deposit amount determines which tier levels you can access and whether you can begin tasks.
+
+| Purpose | Minimum amount |
+|---------|---------------|
+| Start completing tasks | $65 USDT |
+| Junior tier entry | $100 USDT |
+| Intermediate tier entry | $500 USDT |
+| Senior tier entry | $1,500 USDT |
+| Master tier entry | $5,000 USDT |
+
+See [Tier levels](/features/tiers) for a full breakdown of what each tier unlocks.
+
+## How to deposit
+
+<Steps>
+  <Step title="Navigate to the Deposit page">
+    From your dashboard, go to **Wallet** → **Deposit**. The page shows your current wallet balance at the top.
+  </Step>
+  <Step title="Select a network">
+    Choose the network that matches your sending wallet: USDT-TRC20, USDT-BEP20, ETH (ERC20), or BTC. The deposit address and QR code update automatically when you change the network.
+  </Step>
+  <Step title="Enter an amount">
+    Select one of the preset amounts ($30, $50, $100, $300, $500, $1,000, $3,100, $6,200) or type a custom amount in the input field.
+  </Step>
+  <Step title="Send funds to the deposit address">
+    Copy the displayed wallet address or scan the QR code with your external wallet app. Send exactly the amount you entered on the correct network.
+  </Step>
+  <Step title="Upload payment proof">
+    After sending, take a screenshot of the completed transaction from your wallet or exchange. On the Deposit page, click the upload area and select your screenshot (JPG, PNG, or WEBP, max 5 MB). The image is required — your deposit cannot be submitted without it.
+  </Step>
+  <Step title="Submit the deposit request">
+    Click **Submit Deposit**. Your request is saved with a `pending` status and sent to an administrator for review.
+  </Step>
+</Steps>
+
+## Payment proof upload
+
+The `proof_url` field stores the URL of your uploaded payment screenshot. This image is the primary evidence administrators use to verify your deposit. Make sure the screenshot clearly shows:
+
+- The transaction hash or confirmation ID
+- The amount sent
+- The destination address
+- The network used
+
+<Tip>
+Screenshots from your exchange or wallet app are ideal. Avoid cropping out any confirmation details.
+</Tip>
+
+## Deposit status
+
+After you submit, your deposit moves through the following statuses:
+
+| Status | Meaning |
+|--------|---------|
+| `pending` | Submitted and waiting for administrator review |
+| `approved` | Verified and credited to your wallet balance |
+| `rejected` | Not approved — contact support for details |
+
+<Warning>
+Deposits are not instant. Processing typically takes 4–5 hours depending on network confirmation times and administrator availability. Do not attempt to start tasks or upgrade your tier until your deposit status shows `approved`.
+</Warning>
+
+## After approval
+
+Once an administrator approves your deposit:
+
+- Your `wallet_balance` increases by the deposited amount
+- You can view the entry in your [transaction history](/transactions/history)
+- If your balance now meets a tier minimum, you can upgrade your account level
+
+<Note>
+You can track the status of all your deposits from **Wallet** → **Deposit Records** at any time.
+</Note>

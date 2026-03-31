@@ -1,80 +1,134 @@
 ---
-title: "Quickstart"
-description: "Start building awesome documentation in minutes"
+title: 'Quick start'
+description: 'Go from a new account to completing your first optimization task and withdrawing earnings in six steps.'
 ---
 
-## Get started in three steps
+This guide walks you through the complete onboarding flow. Plan around 10–15 minutes to complete account setup and identity verification before you can start tasks.
 
-Get your documentation site running locally and make your first customization.
+<Steps>
+  <Step title="Create your account">
+    Go to the sign-up page and complete the two-step registration form.
 
-### Step 1: Set up your local environment
+    **Step 1 — Security credentials:**
+    - Enter your email address (optional — you can register with a username only)
+    - Set a login password (minimum 6 characters)
+    - Confirm your password
+    - Enter an invitation code if you were referred by another agent (optional)
 
-<AccordionGroup>
-  <Accordion icon="copy" title="Clone your docs locally">
-    During the onboarding process, you created a GitHub repository with your docs content if you didn't already have one. You can find a link to this repository in your [dashboard](https://dashboard.mintlify.com).
-    
-    To clone the repository locally so that you can make and preview changes to your docs, follow the [Cloning a repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository) guide in the GitHub docs.
-  </Accordion>
-  <Accordion icon="rectangle-terminal" title="Start the preview server">
-    1. Install the Mintlify CLI: `npm i -g mint`
-    2. Navigate to your docs directory and run: `mint dev`
-    3. Open `http://localhost:3000` to see your docs live!
-    
-    <Tip>Your preview updates automatically as you edit files.</Tip>
-  </Accordion>
-</AccordionGroup>
+    **Step 2 — Profile details:**
+    - Choose a username
+    - Enter your phone number
+    - Set a 6-digit withdrawal PIN — this is separate from your login password and is required to authorize all withdrawals
 
-### Step 2: Deploy your changes
+    <Warning>
+      Your withdrawal PIN cannot be recovered if lost. Store it somewhere secure before completing registration.
+    </Warning>
 
-<AccordionGroup>
-  <Accordion icon="github" title="Install our GitHub app">
-    Install the Mintlify GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app).
-    
-    Our GitHub app automatically deploys your changes to your docs site, so you don't need to manage deployments yourself.
-</Accordion>
-<Accordion icon="palette" title="Update your site name and colors">
-    For a first change, let's update the name and colors of your docs site.
+    Once you submit, you are signed in and redirected to your dashboard.
+  </Step>
 
-    1. Open `docs.json` in your editor.
-    2. Change the `"name"` field to your project name.
-    3. Update the `"colors"` to match your brand.
-    4. Save and see your changes instantly at `http://localhost:3000`.
+  <Step title="Verify your identity">
+    Identity verification is required before your first withdrawal can be approved. From your dashboard, navigate to your account settings and submit your verification documents early to avoid delays later.
 
-    <Tip>Try changing the primary color to see an immediate difference!</Tip>
-  </Accordion>
-</AccordionGroup>
+    Accepted document types:
+    - Government-issued ID card
+    - Passport
+    - Driver's license
 
-### Step 3: Go live
+    You will need to upload a photo of the front and back of your document. Your verification status moves through these states: **unverified → pending → verified**. Approval is typically completed within 24 hours.
 
-<Accordion icon="rocket" title="Publish your docs">
-  1. Commit and push your changes.
-  2. Your docs will update and be live in moments!
-</Accordion>
+    <Note>
+      If your submission is rejected, you will be notified and can resubmit with a clearer image or a different document type.
+    </Note>
+  </Step>
 
-## Next steps
+  <Step title="Deposit funds to your wallet">
+    Your platform wallet holds USDT (Tether). You must deposit funds before you can activate a tier or start tasks.
 
-Now that you have your docs running, explore these key features:
+    From the dashboard, select **Deposit** and follow the instructions to send USDT to your assigned deposit address.
+
+    Key minimums to keep in mind:
+
+    | Purpose | Minimum required |
+    |---|---|
+    | Start tasks | $65 wallet balance |
+    | Junior Agent tier | $100 |
+    | Intermediate Agent tier | $500 |
+    | Senior Agent tier | $1,500 |
+    | Master Agent tier | $5,000 |
+
+    <Tip>
+      If you want to activate a tier immediately after depositing, send at least the full tier entry amount. Your wallet balance must cover the tier price to activate it.
+    </Tip>
+
+    Deposits are credited to your wallet balance after network confirmation. Check the **Activity records** section to track incoming transactions.
+  </Step>
+
+  <Step title="Select a VIP tier">
+    Your tier determines how many tasks you complete per day and the commission rate you earn on each task.
+
+    | Tier | Entry | Commission rate | Daily tasks |
+    |---|---|---|---|
+    | Junior Agent | $100 | 0.4% | 40 |
+    | Intermediate Agent | $500 | 0.6% | 45 |
+    | Senior Agent | $1,500 | 0.8% | 50 |
+    | Master Agent | $5,000 | 1.0% | 55 |
+
+    Navigate to **VIP Evolution** on your dashboard, select the tier that matches your balance, and confirm. The tier entry amount is deducted from your wallet balance and locked as your optimization capital.
+
+    <Tip>
+      The Senior Agent tier is the most popular entry point for agents targeting steady daily returns. You can always upgrade to a higher tier later as your balance grows.
+    </Tip>
+  </Step>
+
+  <Step title="Complete your first optimization task">
+    Once your tier is active and your identity is verified, navigate to **Start tasks** from your dashboard.
+
+    Each task presents a product listing for you to review. After reviewing, submit your rating to complete the task and earn your commission. Repeat until you have completed your full task set for the day.
+
+    Your commission is calculated as:
+
+    ```text
+    commission = task value × commission rate
+    ```
+
+    For example, a Junior Agent completing a $250 task earns $1.00 (0.4% × $250). Completed tasks accumulate in your **Today's profit** balance in real time.
+
+    <Note>
+      Your task set resets each day. Unused tasks from a previous day do not carry over. Complete your full set each day to maximize your daily earnings.
+    </Note>
+  </Step>
+
+  <Step title="Withdraw your earnings">
+    Before your first withdrawal, register your external USDT wallet address in **Account settings**. You will need:
+    - Your USDT wallet address
+    - The network your wallet uses (e.g., TRC20, ERC20)
+
+    Once your withdrawal wallet is saved, go to **Withdraw** from the dashboard, enter the amount, and confirm using your 6-digit withdrawal PIN.
+
+    Your withdrawal is processed and sent to your registered external wallet. You can track its status in **Activity records**.
+
+    <Tip>
+      Keep your registered withdrawal wallet address up to date. Withdrawals are sent to the address on file at the time of the request.
+    </Tip>
+  </Step>
+</Steps>
+
+## What's next
+
+Now that you have completed your first cycle, explore the rest of the platform:
 
 <CardGroup cols={2}>
-
-<Card title="Write Content" icon="pen-to-square" href="/essentials/markdown">
-  Learn MDX syntax and start writing your documentation.
-</Card>
-
-<Card title="Customize style" icon="palette" href="/essentials/settings">
-  Make your docs match your brand perfectly.
-</Card>
-
-<Card title="Add code examples" icon="square-code" href="/essentials/code">
-  Include syntax-highlighted code blocks.
-</Card>
-
-<Card title="API documentation" icon="code" href="/api-reference/introduction">
-  Auto-generate API docs from OpenAPI specs.
-</Card>
-
+  <Card title="Invite friends" icon="share-2" href="/account/referrals">
+    Share your referral code to earn 20% of every referred agent's daily task profits.
+  </Card>
+  <Card title="Upgrade your tier" icon="trending-up" href="/features/tiers">
+    Grow your wallet balance and unlock higher commission rates and more daily tasks.
+  </Card>
+  <Card title="Transaction history" icon="file-text" href="/transactions/history">
+    Review all deposits, withdrawals, and commission earnings in your audit ledger.
+  </Card>
+  <Card title="Account security" icon="shield-check" href="/account/security">
+    Review your security settings and update your withdrawal PIN if needed.
+  </Card>
 </CardGroup>
-
-<Note>
-  **Need help?** See our [full documentation](https://mintlify.com/docs) or join our [community](https://mintlify.com/community).
-</Note>

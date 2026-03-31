@@ -1,0 +1,98 @@
+---
+title: "Optimization tasks"
+description: "How task matching works in SmartBugMedia, including the task flow, earnings calculation, bundled packages, and daily limits."
+---
+
+Optimization tasks are the core earning mechanism of the SmartBugMedia platform. Each task represents a product review match: the system pairs your account with a product from the task pool, you confirm the match, and you earn a commission on the transaction cost.
+
+## How tasks work
+
+Every task operates against your available wallet balance. When you confirm a task, approximately 98% of your current `wallet_balance` is used as the optimization cost. Your commission (`commission_rate × cost_amount`) is instantly credited back to your account.
+
+```text
+cost_amount  = wallet_balance × 0.98
+earned       = commission_rate × cost_amount
+```
+
+Because the commission is earned on the cost, your balance compounds slightly with each completed task within a set.
+
+## Task matching flow
+
+<Steps>
+  <Step title="Ready">
+    Navigate to the Optimization Command Center at `/start`. The page displays a 5×5 grid of 24 product images drawn from the task pool for your tier. The center cell shows the **START** button. Your wallet balance, today's profit, frozen assets, and set progress are displayed in the header stats.
+  </Step>
+  <Step title="Start">
+    Press **START**. The system checks that your wallet balance is at or above $65 and that you have no pending (unconfirmed) tasks. If both conditions pass, the matching sequence begins and the status indicator changes to **CONNECTING TO CLOUD**.
+  </Step>
+  <Step title="Spin">
+    The product grid animates, highlighting items in rapid succession to simulate the matching algorithm. This lasts approximately 1.2 seconds. The status changes to **MATCH FOUND** when complete.
+  </Step>
+  <Step title="Match">
+    A single product is selected from the pool. The highlighted cell contains the matched product. If a bundled package is scheduled for this task index, the system injects the bundle product into the grid instead.
+  </Step>
+  <Step title="Confirm">
+    A task detail modal opens showing the matched product. Review the item details, the optimization cost (based on your current wallet balance), and the estimated commission. Press **Confirm** to submit the task.
+  </Step>
+  <Step title="Earn">
+    The `complete_user_task` database function records the task, credits your commission to `profit`, and updates your `completed_count`. A success notification and confetti animation confirm the earning. The grid refreshes with a new set of products for your next task.
+  </Step>
+</Steps>
+
+## Task sets and daily limits
+
+Your tier determines how many tasks you can complete per day. Tasks are organized into sets.
+
+| Field | Description |
+|---|---|
+| `tasks_per_set` | Number of tasks in a single set. |
+| `sets_per_day` | Number of sets you can complete per day. |
+| `current_set` | Which set you are currently working through (stored on your profile). |
+| `completed_count` | Total tasks completed since your last daily reset. |
+
+Progress within the current set is tracked as `completed_count % tasks_per_set`. When you finish all tasks in a set, the set is marked complete and you must contact support to unlock the next set before continuing.
+
+When `current_set >= sets_per_day` and the current set is full, the daily limit is reached. Tasks are locked until the next daily reset.
+
+<Note>
+  Your wallet balance must be at least **$65** to start a task. If your balance falls below this threshold, deposits are required before the START button becomes active.
+</Note>
+
+## Bundled packages
+
+Occasionally, the system schedules a bundled package task at a specific index within your set. A bundled package is a higher-value product match that requires additional capital beyond your available balance.
+
+When a bundled package is triggered:
+
+1. The bundle modal opens instead of the standard task detail modal.
+2. The modal shows the package name, description, required total amount, shortage amount (how much extra you need), and a bonus amount that will be credited.
+3. If you accept, the `totalAmount` is deducted from your `wallet_balance` and the `totalAmount + bonusAmount` is added to your `freeze_balance`.
+4. A `pending` user task record is created with `is_bundle: true`.
+5. You are redirected to the activity records page to await settlement.
+
+Frozen funds are held in `freeze_balance` until the bundle is settled by the platform. Once settled, funds are unfrozen and your earned commission is released.
+
+<Tip>
+  Bundled packages carry a bonus amount on top of the standard commission. If you have sufficient funds, accepting bundles is one of the fastest ways to increase daily earnings.
+</Tip>
+
+## Task states
+
+Each `UserTask` record has one of three statuses:
+
+| Status | Meaning |
+|---|---|
+| `pending` | Task submitted and awaiting settlement (always applies to bundle tasks). |
+| `completed` | Task confirmed and commission credited. |
+| `cancelled` | Task was cancelled before completion. |
+
+If you have a pending task, the START button is disabled and you are redirected to `/record` to review or resolve the outstanding task before starting a new one.
+
+## Lock conditions
+
+The START button is disabled under the following conditions:
+
+- **Minimum balance not met** — wallet balance is below $65.
+- **Pending task exists** — a task with `status: 'pending'` is present for your account.
+- **Set complete** — you have finished all tasks in the current set and must contact support to advance to the next set.
+- **Daily limit reached** — all sets for the day are complete. Tasks resume after the daily reset.

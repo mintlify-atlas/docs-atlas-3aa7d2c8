@@ -1,0 +1,81 @@
+---
+title: "VIP level management"
+description: "How to create, edit, and configure VIP tier levels in the SmartBugMedia admin panel."
+---
+
+The Levels page (`/admin/levels`) controls the VIP tier system. Each user is assigned to a tier based on their deposit, and the tier determines their commission rate, how many tasks they complete per set, and how many sets they can run per day.
+
+## Overview of the VIP tier system
+
+SmartBugMedia uses a 4-tier VIP system. Users activate a tier by depositing the required entry amount. Higher tiers unlock better commission rates and larger task quotas.
+
+### Default tier reference
+
+| Level             | Entry price | Commission rate | Tasks per set | Sets per day |
+| ----------------- | ----------- | --------------- | ------------- | ------------ |
+| Junior Agent      | $100        | 0.4%            | 40            | 3            |
+| Intermediate      | $500        | 0.6%            | 45            | 3            |
+| Senior Agent      | $1,500      | 0.8%            | 50            | 3            |
+| Master Agent      | $5,000      | 1.0%            | 55            | 3            |
+
+<Note>
+The values above are the default configuration. Your platform's actual tier configuration is live in the database and may have been updated. Check the Levels page for current values.
+</Note>
+
+## Level fields
+
+Each VIP tier is defined by the following fields:
+
+| Field             | Type    | Description                                                    |
+| ----------------- | ------- | -------------------------------------------------------------- |
+| `name`            | string  | Display name for the tier (e.g., "Junior Agent")               |
+| `price`           | number  | Minimum deposit required to activate this tier (USD)          |
+| `commission_rate` | number  | Decimal commission rate applied per task (e.g., `0.004` = 0.4%) |
+| `tasks_per_set`   | number  | Number of tasks in a single set for this tier                  |
+| `sets_per_day`    | number  | Maximum sets a user at this tier can complete per day          |
+| `description`     | string  | Optional description displayed on the tier card                |
+| `badge_color`     | string  | Hex color for the tier badge (e.g., `#7c3aed`)                 |
+
+## Creating a new tier
+
+Click **Add tier** at the top of the page to open the creation form. Fill in all fields:
+
+1. **Tier name** — a descriptive name users will see
+2. **Activation price** — the USD amount required to join this tier
+3. **Commission multiplier** — the decimal commission rate (use `0.004` for 0.4%)
+4. **Tasks per set** — how many tasks users at this tier complete per set
+5. **Daily sets** — how many sets per day users at this tier can run
+6. **Brand color** — use the color picker or enter a hex value directly
+
+Click **Activate tier** to save.
+
+## Editing existing tiers
+
+Each tier card has an edit button (pencil icon) and a delete button. Click the edit button to enter inline edit mode directly on the card.
+
+You can update all fields:
+
+- **Name** — displayed to users on their profile and task screen
+- **Price** — changing this adjusts which users qualify for this tier going forward; existing users are not moved
+- **Commission rate** — takes effect on the next task set for users at this tier
+- **Tasks per set** — changes the set size for users at this tier on the next set reset
+- **Sets per day** — controls daily task capacity
+- **Description** — optional flavor text shown on the tier card in the admin
+
+Click **Save** to apply changes.
+
+<Warning>
+Changes to `commission_rate`, `tasks_per_set`, or `sets_per_day` take effect for all users at that tier. Test carefully before updating a production tier.
+</Warning>
+
+## Deleting a tier
+
+Click the trash icon on a tier card and confirm the prompt to permanently delete the tier. Users currently assigned to a deleted tier will have `level_id` pointing to a non-existent record — reassign them first before deleting the tier.
+
+<Warning>
+Deleting a tier is permanent. Make sure no users are assigned to the tier before deleting it.
+</Warning>
+
+## How tiers relate to task items
+
+Task items in the platform are assigned a `level_id` field that maps them to a specific tier. When a user runs a task set, the system pulls items assigned to their tier. If you add a new tier, you must also populate task items for that tier from the [Tasks page](/admin/tasks) before users can complete sets on it.

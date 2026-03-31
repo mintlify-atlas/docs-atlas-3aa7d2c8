@@ -1,0 +1,57 @@
+---
+title: "Notifications"
+description: "How to send platform-wide push notifications to all users from the SmartBugMedia admin panel."
+---
+
+The Notifications page (`/admin/notify`) lets you compose and send push notifications to all registered users simultaneously. Notifications are delivered immediately to every user on the platform and stored in a broadcast history log.
+
+## How notifications work
+
+When you send a notification, the system collects all registered user IDs and sends the notification payload to each account via `POST /api/admin/notify`. The notification appears in the user's in-app notification center (controlled by `notifications_enabled` on their profile).
+
+The **Engagement status** panel on the right side of the page shows how many active users will receive the broadcast before you send.
+
+## Notification content
+
+Each notification has two fields:
+
+| Field     | Required | Description                                                |
+| --------- | -------- | ---------------------------------------------------------- |
+| Title     | Yes      | Short subject line shown as the notification heading       |
+| Message   | Yes      | Full notification body — supports plain text               |
+
+## Sending a notification
+
+<Steps>
+  <Step title="Go to the Notifications page">
+    Navigate to `/admin/notify`.
+  </Step>
+  <Step title="Check the recipient count">
+    The **Engagement status** panel on the right shows the total number of users who will receive the broadcast. Wait for the page to finish loading the user list if it shows "Scanning...".
+  </Step>
+  <Step title="Compose the notification">
+    Enter a title and message in the **Compose transmission** form. Keep the title concise — it appears as the headline in the user's notification panel.
+  </Step>
+  <Step title="Send the broadcast">
+    Click **Execute protocol** to send the notification to all users. A confirmation toast will confirm the number of users reached.
+  </Step>
+</Steps>
+
+<Warning>
+Notifications are broadcast to all registered users the moment you click send. There is no targeting by user segment, VIP level, or other criteria — every user receives the notification. Verify your content before sending.
+</Warning>
+
+## Broadcast history
+
+Below the composition form, the **Transmission ledger** shows all previously sent notifications, including:
+
+- Notification title
+- Message content
+- Number of users reached
+- Timestamp of the broadcast
+
+To remove a historical broadcast record from the log, click the delete icon on the history entry and confirm. This only removes the record from the log — it does not unsend the notification from user accounts.
+
+<Note>
+Broadcasts are immutable once sent. You cannot recall or edit a notification after it has been delivered to users.
+</Note>

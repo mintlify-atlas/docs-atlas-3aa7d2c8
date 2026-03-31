@@ -1,0 +1,110 @@
+---
+title: "Registration"
+description: "Create your SmartBugMedia account, verify your identity, and get ready to complete your first optimization task."
+---
+
+Creating an account on SmartBugMedia takes a few minutes. The sign-up flow is split into two steps: setting your credentials, then completing your profile. After registration you will need to fund your wallet and select a VIP tier before you can start tasks.
+
+## Sign-up flow
+
+<Steps>
+  <Step title="Open the sign-up page">
+    Navigate to the SmartBugMedia sign-up page. If someone invited you, use their referral link — it will pre-fill your invitation code automatically.
+  </Step>
+  <Step title="Enter your credentials">
+    Provide the following information in step one of the form:
+
+    - **Email address** — optional, but required if you want email-based login and recovery.
+    - **Password** — at least 6 characters.
+    - **Confirm password** — must match exactly.
+    - **Invitation code** — the 4-character code from the agent who referred you (optional). If you received a referral link, this field is pre-filled.
+  </Step>
+  <Step title="Complete your profile">
+    Step two collects your identity information:
+
+    - **Username** — your unique handle on the platform.
+    - **Phone number** — required for account identification.
+    - **Withdrawal PIN** — a 6-digit numeric PIN used to authorize all withdrawals. Set this carefully; you will need it every time you withdraw funds.
+    - **Confirm withdrawal PIN** — must match your chosen PIN exactly.
+  </Step>
+  <Step title="Submit your registration">
+    Click **Complete Setup**. The platform creates your account and sends a welcome email if you provided an email address.
+
+    - **With email:** you are redirected to a success page. Check your inbox for a confirmation link and click it to verify your email address before logging in.
+    - **Without email:** you are signed in automatically and redirected to the dashboard.
+  </Step>
+  <Step title="Fund your wallet and select a tier">
+    A new account starts with a zero balance. You must deposit USDT and activate a VIP tier before the Optimization Command Center becomes available. See [Deposits](/transactions/deposits) and [VIP tiers](/features/tiers) for next steps.
+  </Step>
+</Steps>
+
+<Note>
+  Your invitation code is the referral code of the agent who invited you — also called their Node ID. Entering it correctly links your account to their network so they receive referral earnings from your activity.
+</Note>
+
+## Email verification
+
+If you registered with an email address, SmartBugMedia sends a confirmation link to that address. Click the link to verify your email. Until verification is complete, some account features may be restricted.
+
+If you did not receive the email, check your spam folder. You can also resend the confirmation from your profile settings at any time.
+
+## Identity verification
+
+Identity verification is required before you can make your first withdrawal. It is not required to complete tasks or deposit funds.
+
+### Verification states
+
+Your account has a `verification_status` that progresses through the following states:
+
+| Status | Meaning |
+|---|---|
+| **Unverified** | No documents have been submitted yet. |
+| **Pending** | Documents submitted and under review. Typically reviewed within 24–48 hours. |
+| **Verified** | Identity confirmed. Withdrawals are fully unlocked. |
+| **Rejected** | Documents were not accepted. You can resubmit with corrected or clearer documents. |
+
+### Accepted document types
+
+SmartBugMedia accepts the following government-issued documents:
+
+- **Government ID** — national identity card (front and back).
+- **Passport** — photo page (front only required; back upload is optional).
+- **Driver's license** — front and back.
+
+### How to submit your documents
+
+<Steps>
+  <Step title="Go to your profile">
+    Open your profile and navigate to the identity verification section.
+  </Step>
+  <Step title="Select your document type">
+    Choose government ID, passport, or driver's license from the document type selector.
+  </Step>
+  <Step title="Upload front and back images">
+    Upload a clear, well-lit photo of the front of your document. Upload the back image where required. Make sure all text and the photo on the document are fully visible — blurry or cropped images will be rejected.
+  </Step>
+  <Step title="Submit for review">
+    Submit your documents. Your `verification_status` changes to **Pending**. You will be notified once the review is complete.
+  </Step>
+</Steps>
+
+<Warning>
+  Do not submit documents belonging to another person. Submitting falsified identity documents will result in permanent account suspension.
+</Warning>
+
+## Next steps
+
+<CardGroup cols={2}>
+  <Card title="Your profile" icon="user" href="/account/profile">
+    Update your display name, phone number, and notification preferences.
+  </Card>
+  <Card title="Account security" icon="shield" href="/account/security">
+    Set up your security PIN and learn how to protect your account.
+  </Card>
+  <Card title="Deposits" icon="arrow-down-to-line" href="/transactions/deposits">
+    Fund your wallet with USDT to activate your tier and start tasks.
+  </Card>
+  <Card title="VIP tiers" icon="trophy" href="/features/tiers">
+    Compare tier levels and choose the one that fits your goals.
+  </Card>
+</CardGroup>

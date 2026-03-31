@@ -1,0 +1,91 @@
+---
+title: "Agent Dashboard"
+description: "Your central hub for monitoring balances, tracking task progress, and navigating the SmartBugMedia platform."
+---
+
+The Agent Dashboard is the first screen you see after signing in. It gives you a real-time snapshot of your financial position, task activity, VIP tier progress, and quick links to every major section of the platform.
+
+## Terminal header
+
+The top section of the dashboard identifies your session and displays your connection status.
+
+| Element | Description |
+|---|---|
+| Username | Your agent handle displayed in the header. |
+| Node ID | Your unique referral code. Click it to copy to clipboard. |
+| Identity Shard | Confirms your account is verified and active. |
+| Neural Active | Live indicator showing your session is connected. |
+
+## Financial snapshot
+
+Three metric cards sit directly below the header. Each updates in real time as tasks complete and transactions are processed.
+
+| Metric | Source field | Description |
+|---|---|---|
+| Available balance | `wallet_balance` | Spendable USDT in your account, used as the base cost for each task. |
+| Today's profit | `profit` | Commission earned from completed tasks in the current session. Resets on the daily cycle. |
+| Referral bonus | `referral_earned` | Cumulative USDT earned from network referrals. Each referred agent generates a 20% yield on their daily productivity. |
+
+## Task progress stats
+
+Below the financial cards you can see your current task activity:
+
+- **Completed tasks** — total tasks finished (`completed_count` on your profile).
+- **Pending tasks** — tasks that have been matched but not yet confirmed.
+- **Total tasks** — all tasks ever created for your account.
+
+## VIP Evolution Module
+
+The VIP Evolution Module shows your progress across the four agent tiers. Each tier card displays:
+
+- Tier name and entry price
+- Commission rate (rebate power)
+- A progress bar showing how far through the current task set you are
+
+Locked tiers are greyed out until you upgrade. Your current tier is stored in `level_id` on your profile.
+
+<Tip>
+  Click **View All Nodes** to go to the full tier comparison page, where you can review entry requirements and upgrade your level.
+</Tip>
+
+## Quick Hub
+
+The Quick Hub gives you one-tap access to eight platform sections. Actions are arranged in a 2×4 grid on mobile and a single row on desktop.
+
+<CardGroup cols={2}>
+  <Card title="Deposit" icon="arrow-down-left" href="/transactions/deposits">
+    Add USDT funds to your wallet balance.
+  </Card>
+  <Card title="Withdraw" icon="arrow-up-right" href="/transactions/withdrawals">
+    Initiate a payout to your verified wallet address.
+  </Card>
+  <Card title="Terms" icon="shield-check" href="/platform/rules">
+    Review the platform rules and terms of service.
+  </Card>
+  <Card title="FAQ" icon="circle-help" href="/platform/faq">
+    Browse frequently asked questions.
+  </Card>
+  <Card title="Privacy" icon="shield-alert" href="/platform/privacy">
+    Read the privacy policy.
+  </Card>
+  <Card title="Concierge" icon="headset" href="/account/security">
+    Contact live agent support via the Concierge Hub.
+  </Card>
+</CardGroup>
+
+## System nodes
+
+Four shortcut tiles at the bottom of the dashboard link to the most common workflows:
+
+- **Start tasks** — opens the Optimization Command Center to begin a task set.
+- **Activity records** — shows your complete task and transaction history.
+- **Concierge Hub** — connects you to support.
+- **Legal governance** — links to compliance and terms documentation.
+
+<Note>
+  All balances and stats on the dashboard reflect data fetched at page load. Navigate away and back to refresh the values, or use the activity records page for the most recent transaction history.
+</Note>
+
+## Network Expansion Program
+
+A banner near the bottom of the dashboard promotes the referral program. Share your Node ID to invite other agents. You earn 20% of their daily task commission as a perpetual referral bonus, credited to `referral_earned`.

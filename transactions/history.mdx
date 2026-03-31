@@ -1,0 +1,80 @@
+---
+title: "Transaction history"
+description: "View and understand every financial event recorded in your SmartBugMedia account ledger."
+---
+
+The transaction history — also called the audit ledger — is a complete record of every financial event on your account. It covers deposits, withdrawals, commissions earned from tasks, and the freezing and unfreezing of funds for bundle task orders.
+
+Access your history from **Wallet** → **Records**, or from the Record page in your dashboard.
+
+## Transaction types
+
+Each entry in the ledger has a `type` field that identifies what kind of financial event occurred.
+
+| Type | Description |
+|------|-------------|
+| `deposit` | Funds added to your wallet after an administrator approves a deposit request |
+| `withdrawal` | Funds sent from your wallet to an external address after administrator approval |
+| `commission` | Earnings credited to your wallet when you complete a task |
+| `freeze` | Funds moved from your `wallet_balance` into `freeze_balance` when a bundle task order is placed |
+| `unfreeze` | Funds returned from `freeze_balance` to `wallet_balance` when a bundle task resolves |
+
+## Transaction statuses
+
+Entries that involve an administrator action carry a `status` field.
+
+| Status | Meaning |
+|--------|---------|
+| `pending` | Request submitted, awaiting administrator review |
+| `approved` | Reviewed and completed — balance has been updated |
+| `rejected` | Not approved — no balance change occurred |
+
+`commission`, `freeze`, and `unfreeze` entries are applied automatically and do not require administrator review.
+
+## Reading the audit ledger
+
+Each ledger row shows:
+
+- **Timestamp** — date and time the transaction was created
+- **Details** — description of the event, including the type and any relevant context such as the network used
+- **Amount** — the USDT value of the transaction
+- **Status** — current state of the transaction (where applicable)
+
+Entries are sorted with the most recent first. The ledger returns up to 500 entries.
+
+## Filtering your records
+
+Use the filter controls at the top of the Records page to narrow your view:
+
+- **Status filter** — show all records, or filter to `completed` or `pending` entries only
+- **Date filter** — view all records, or limit to today or yesterday
+- **Search** — search by task name or transaction ID
+
+<Note>
+The activity records page shows task records (optimizations you have completed or submitted). For deposit and withdrawal transaction records specifically, use the dedicated Deposit Records and Withdrawal Records pages linked from the Wallet section.
+</Note>
+
+## Wallet balance fields
+
+Your account profile tracks several balance-related values that correspond to transaction activity:
+
+| Field | Description |
+|-------|-------------|
+| `wallet_balance` | Your current available USDT balance, usable for tasks and withdrawals |
+| `freeze_balance` | Funds locked in active bundle task orders |
+| `profit` | Commission earnings credited today |
+| `total_earned` | All-time commission earnings |
+| `referral_earned` | Total earnings from referral bonuses |
+
+These values update in real time as transactions are processed and tasks are completed.
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Depositing funds" icon="arrow-down-to-line" href="/transactions/deposits">
+    Add USDT to your wallet to fund tasks and unlock tier levels.
+  </Card>
+  <Card title="Withdrawing earnings" icon="arrow-up-from-line" href="/transactions/withdrawals">
+    Send your earned USDT to an external wallet address.
+  </Card>
+</CardGroup>

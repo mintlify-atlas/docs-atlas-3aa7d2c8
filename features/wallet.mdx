@@ -1,0 +1,89 @@
+---
+title: "Wallet management"
+description: "How to deposit funds, withdraw earnings, and understand your balance, frozen assets, and transaction history on SmartBugMedia."
+---
+
+The wallet is your financial hub on SmartBugMedia. All platform activity — task costs, commission credits, referral bonuses, and payouts — flows through your USDT wallet. The wallet page at `/wallet` gives you a complete view of your assets and quick access to deposit and withdrawal actions.
+
+## Balance overview
+
+The top of the wallet page displays your total assets card with three supporting metrics:
+
+| Metric | Source field | Description |
+|---|---|---|
+| Total assets | `wallet_balance` | Your available USDT balance. This is the amount used as the base cost for each optimization task. |
+| Today's profit | `profit` | Commission earned from tasks in the current session. Displayed with a `+` prefix. |
+| Referral bonus | `referral_earned` | Total USDT earned through the referral program. Displayed with a `+` prefix. |
+| Completed tasks | `completed_count` | The total number of tasks you have confirmed across all sessions. |
+
+All figures are denominated in USDT.
+
+## Available balance vs frozen balance
+
+Your profile holds two distinct balance fields:
+
+**`wallet_balance`** — freely spendable funds. This is what the task system draws from when calculating the optimization cost for each task (`wallet_balance × 0.98`).
+
+**`freeze_balance`** — funds that are locked because of an active bundled package task. When you accept a bundle, the required `totalAmount` moves from `wallet_balance` to `freeze_balance` along with the `bonusAmount`. Frozen funds are released back (plus the earned bonus) once the bundle is settled by the platform.
+
+<Note>
+  Frozen funds cannot be withdrawn or used for standard tasks. They are held in escrow until the bundle settlement is processed.
+</Note>
+
+## Deposit
+
+To add USDT to your account, use the **Inject Funds** card on the wallet page or the **Deposit** shortcut in the Quick Hub on the dashboard.
+
+<CardGroup cols={2}>
+  <Card title="Deposit funds" icon="arrow-down-left" href="/transactions/deposits">
+    Add USDT to your wallet balance. Follow the on-screen instructions to send funds to the platform deposit address.
+  </Card>
+  <Card title="Withdraw earnings" icon="arrow-up-right" href="/transactions/withdrawals">
+    Initiate a payout to your verified withdrawal wallet address.
+  </Card>
+</CardGroup>
+
+Deposits are reflected in your `wallet_balance` once confirmed on-chain and approved by the platform. A `deposit` transaction record is created in your history.
+
+## Withdrawal
+
+To withdraw your earnings, click **Initiate Payout** on the wallet page or navigate to **Transactions → Withdrawals**. Withdrawals require:
+
+- A verified withdrawal wallet address saved to your profile (`withdrawal_wallet_address`).
+- Sufficient available balance (only `wallet_balance` is withdrawable; `freeze_balance` is not).
+
+Once submitted, the withdrawal creates a transaction record with `type: 'withdrawal'` and `status: 'pending'`. The platform reviews and approves payouts. You will see the status update in your transaction history once processed.
+
+<Warning>
+  Double-check your withdrawal wallet address before submitting a payout request. Transactions sent to an incorrect address cannot be reversed.
+</Warning>
+
+## Transaction types
+
+Every financial movement on the platform creates a `Transaction` record. The five transaction types are:
+
+| Type | Description |
+|---|---|
+| `deposit` | Funds added to your wallet. |
+| `withdrawal` | Payout sent to your external wallet address. |
+| `commission` | Earnings credited from a completed optimization task. |
+| `freeze` | Funds moved from `wallet_balance` to `freeze_balance` when a bundle is accepted. |
+| `unfreeze` | Funds released from `freeze_balance` back to `wallet_balance` after bundle settlement. |
+
+Transactions may carry a `status` of `pending`, `approved`, or `rejected` depending on whether they require platform review.
+
+## Transaction history
+
+A full audit of your activity is available at `/record`. From the wallet page, three quick links are provided:
+
+- **History logs** — complete transaction and task activity.
+- **Payment node** — manage your saved payout wallet address at `/profile/wallet`.
+- **Asset protection** — security settings at `/profile/security`.
+
+<Tip>
+  Keep your payment node address up to date. Withdrawal requests always go to the address saved at `/profile/wallet`, regardless of what you enter at submission time.
+</Tip>
+
+## Currency
+
+The SmartBugMedia platform operates entirely in **USDT (Tether)**. All balances, task costs, commissions, and payouts are denominated in USDT. The platform supports display currency formatting based on your profile `currency` setting, but the underlying value is always USDT.

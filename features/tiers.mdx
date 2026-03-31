@@ -1,0 +1,104 @@
+---
+title: "VIP tier levels"
+description: "The four SmartBugMedia agent tiers, their entry requirements, commission rates, daily task limits, and how to upgrade."
+---
+
+SmartBugMedia uses a four-tier VIP system that determines your commission rate, the number of tasks per set, and the features available to your account. Your current tier is stored as `level_id` on your profile and is referenced by the task system to load the correct task pool and earning parameters.
+
+<Note>
+  You must be assigned a tier level before you can start optimization tasks. Accounts without a `level_id` will not have access to the Optimization Command Center.
+</Note>
+
+## Tier comparison
+
+| Tier | Entry price | Commission rate | Tasks per set | Sets per day | Total daily tasks |
+|---|---|---|---|---|---|
+| Junior Agent | $100 | 0.4% | 40 | 3 | 120 |
+| Intermediate Agent | $500 | 0.6% | 45 | 3 | 135 |
+| Senior Agent | $1,500 | 0.8% | 50 | 3 | 150 |
+| Master Agent | $5,000 | 1.0% | 55 | 3 | 165 |
+
+The **Senior Agent** tier is the most popular and is highlighted on the platform's landing page.
+
+## Tier details
+
+<CardGroup cols={2}>
+  <Card title="Junior Agent" icon="award" href="/quickstart">
+    **Entry:** $100
+
+    **Commission rate:** 0.4%
+
+    **Tasks per set:** 40 — 120 tasks/day
+
+    Standard node access and daily optimization cycle. Suitable for agents starting out on the platform.
+  </Card>
+  <Card title="Intermediate Agent" icon="award" href="/quickstart">
+    **Entry:** $500
+
+    **Commission rate:** 0.6%
+
+    **Tasks per set:** 45 — 135 tasks/day
+
+    Enhanced yield velocity with priority node access and extended audit logs.
+  </Card>
+  <Card title="Senior Agent" icon="award" href="/quickstart">
+    **Entry:** $1,500
+
+    **Commission rate:** 0.8%
+
+    **Tasks per set:** 50 — 150 tasks/day
+
+    Premium distribution tier. Most active tier on the platform.
+  </Card>
+  <Card title="Master Agent" icon="award" href="/quickstart">
+    **Entry:** $5,000
+
+    **Commission rate:** 1.0%
+
+    **Tasks per set:** 55 — 165 tasks/day
+
+    Highest tier with maximum commission rate and the most tasks per day.
+  </Card>
+</CardGroup>
+
+## How commission is calculated
+
+Each time you confirm a task, the system computes your earnings as:
+
+```text
+cost_amount = wallet_balance × 0.98
+earned      = commission_rate × cost_amount
+```
+
+A higher tier means a higher `commission_rate`, which directly increases your earnings per task. Combined with more tasks per set and more sets per day, upgrading tiers has a compounding effect on daily income.
+
+**Example — Senior Agent with $2,000 balance:**
+
+```text
+cost_amount = $2,000 × 0.98 = $1,960
+earned      = 0.008 × $1,960 = $15.68 per task
+daily max   = $15.68 × 150 tasks = $2,352
+```
+
+## Upgrading your tier
+
+To upgrade, contact support through the Concierge Hub on your dashboard or reach out through the platform's support channel. The upgrade requires a deposit meeting the new tier's entry price. Once approved by the platform:
+
+1. Your `level_id` is updated to the new tier.
+2. The task system immediately loads the new `tasks_per_set`, `sets_per_day`, and `commission_rate` for your account.
+3. The VIP Evolution Module on your dashboard reflects the new tier and unlocks the corresponding tier card.
+
+<Tip>
+  Upgrading mid-cycle resets your task set progress. Plan upgrades at the start of a new daily cycle to maximize earnings at the higher tier from day one.
+</Tip>
+
+## Tier progression on the dashboard
+
+The VIP Evolution Module on the Agent Dashboard displays all four tier cards. Your current tier and all tiers below it appear active. Tiers above your current `level_id` are shown as locked (greyed out and non-interactive) until you upgrade.
+
+Each card shows:
+- Tier name and entry price
+- Commission rate (labelled as "rebate power")
+- A progress bar tracking how far through the current task set you are, calculated as `completed_count % tasks_per_set`
+
+Navigate to **VIP Evolution** on your dashboard to view the full tier detail and upgrade options.

@@ -1,0 +1,86 @@
+---
+title: "Withdrawing earnings"
+description: "Send your earned USDT from your SmartBugMedia wallet to an external wallet address."
+---
+
+Withdrawals let you transfer your available `wallet_balance` to an external cryptocurrency wallet. All withdrawals are submitted as requests and processed by an administrator, typically within 24 hours.
+
+## Prerequisites
+
+Before you can submit your first withdrawal, your account must meet all of the following conditions:
+
+<Steps>
+  <Step title="Complete identity verification">
+    Your `verification_status` must be `verified`. Submit your ID documents under **Profile** → **Verification** and wait for administrator approval. Withdrawals are blocked while your status is `unverified`, `pending`, or `rejected`.
+  </Step>
+  <Step title="Set a withdrawal wallet address">
+    Add your external wallet address in your account settings (`withdrawal_wallet_address`). This is the address your funds will be sent to.
+  </Step>
+  <Step title="Select a wallet network">
+    Configure your preferred network (`wallet_network`) — USDT-TRC20, USDT-BEP20, ETH (ERC20), or BTC — to match your external wallet.
+  </Step>
+  <Step title="Set a withdrawal password">
+    Create a `withdrawal_password` in your account security settings. This password is required every time you initiate a withdrawal.
+  </Step>
+  <Step title="Set a security PIN">
+    Create a `security_pin` in your account security settings. You must enter this PIN to confirm each withdrawal request.
+  </Step>
+</Steps>
+
+## How to withdraw
+
+<Steps>
+  <Step title="Navigate to the Withdraw page">
+    Go to **Wallet** → **Withdraw**. Your available balance is displayed at the top of the page.
+  </Step>
+  <Step title="Enter a withdrawal amount">
+    Type the amount you want to withdraw, or use one of the quick-select chips. The minimum withdrawal amount depends on your current tier level. You cannot withdraw more than your available `wallet_balance`.
+  </Step>
+  <Step title="Select the target network">
+    Choose the network that matches your external wallet: USDT-TRC20, USDT-BEP20, ETH (ERC20), or BTC.
+  </Step>
+  <Step title="Confirm your wallet address">
+    Review the wallet address shown. If it needs updating, edit your `withdrawal_wallet_address` in account settings before proceeding.
+  </Step>
+  <Step title="Enter your security PIN and withdrawal password">
+    Provide both credentials when prompted to authorize the request.
+  </Step>
+  <Step title="Submit the request">
+    Click **Initiate Payout**. Your request is created with a `pending` status and sent to an administrator for review.
+  </Step>
+</Steps>
+
+<Warning>
+Never share your security PIN or withdrawal password with anyone, including SmartBugMedia support staff. Legitimate support requests will never ask for these credentials.
+</Warning>
+
+## Minimum withdrawal amounts
+
+The minimum withdrawal amount is determined by your tier level. You can view your current minimum on the Withdraw page under your available balance.
+
+## Withdrawal status
+
+| Status | Meaning |
+|--------|---------|
+| `pending` | Submitted and queued for administrator review |
+| `approved` | Processed and funds sent to your external wallet |
+| `rejected` | Not approved — contact support for details |
+
+Withdrawals are typically processed within 24 business hours after submission.
+
+## Frozen balance and withdrawable funds
+
+Your wallet has two balance fields:
+
+- **`wallet_balance`** — funds available for withdrawal
+- **`freeze_balance`** — funds locked in active bundle task orders
+
+Funds in `freeze_balance` are held until the associated bundle task is completed or released. They cannot be withdrawn while frozen. Once a bundle task resolves, the funds are unfrozen and returned to `wallet_balance`.
+
+<Tip>
+Before requesting a withdrawal, check your transaction history to see if any funds are currently frozen in a pending bundle task. Completing the bundle task first will increase your available withdrawable balance.
+</Tip>
+
+<Note>
+All withdrawals are visible in your [transaction history](/transactions/history) immediately after submission, where you can monitor their status.
+</Note>

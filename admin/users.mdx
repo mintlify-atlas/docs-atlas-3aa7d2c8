@@ -1,0 +1,120 @@
+---
+title: "User management"
+description: "How to view, search, edit, verify, and manage user accounts from the SmartBugMedia admin panel."
+---
+
+The Users page (`/admin/users`) displays all registered accounts on the platform. From here you can search users, edit their details, manage verification, adjust balances, configure overrides, reset passwords, and delete accounts.
+
+## Viewing the user list
+
+The user table loads all profiles from the platform on page load. Each row shows:
+
+- **Username** and account creation date
+- **Email** and phone number
+- **Role** (`admin` or standard user) and assigned VIP level
+- **Wallet balance**, freeze balance, and profit (yield)
+- **Completed task count** and current set number
+
+Summary stat cards above the table show total users, admin account count, active users (those with a positive balance), and total capital across all wallets combined.
+
+## Searching and filtering
+
+Use the search bar at the top right to filter users by:
+
+- Username
+- Email address
+- Phone number
+- User ID
+
+The table updates in real time as you type.
+
+## Creating a new user
+
+Click **New node** to open the user creation modal. Fill in the required fields:
+
+| Field    | Required | Notes                              |
+| -------- | -------- | ---------------------------------- |
+| Username | Yes      | Unique identifier for the account  |
+| Email    | Yes      | Used for authentication            |
+| Password | Yes      | Temporary password for the account |
+| Phone    | No       | Optional contact number            |
+| Role     | Yes      | `user` or `admin`                  |
+
+Click **Initialize participant** to create the account.
+
+## Editing user details
+
+Click the edit button (pencil icon) on any user row to enter inline edit mode. You can modify:
+
+- Username
+- Phone number
+- Role (`user` or `admin`)
+- VIP level assignment (`level_id`)
+- Wallet balance
+- Freeze balance
+- Profit (yield)
+- Completed task count
+- Current set number
+- Withdrawal password
+- `tasks_per_set_override` — overrides the tier default for this user specifically
+- `sets_per_day_override` — overrides the tier default for this user specifically
+
+Click the save icon to apply changes or the cancel icon to discard them.
+
+<Note>
+The `tasks_per_set_override` and `sets_per_day_override` fields allow you to give individual users a different task quota than the one defined by their VIP tier. Leave these blank to use the tier defaults.
+</Note>
+
+## Managing user verification
+
+Users submit identity documents to raise their `verification_status`. The possible statuses are:
+
+| Status       | Meaning                                       |
+| ------------ | --------------------------------------------- |
+| `unverified` | User has not submitted documents              |
+| `pending`    | Documents submitted, awaiting admin review    |
+| `verified`   | Admin has approved the submitted documents    |
+| `rejected`   | Admin has rejected the submitted documents    |
+
+Users may submit a government ID, passport, or driver's license (`verification_doc_type`). Both front and back image URLs are stored on the profile.
+
+### Verification approval workflow
+
+<Steps>
+  <Step title="Locate the user">
+    Search for the user in the Users table by name, email, or ID.
+  </Step>
+  <Step title="Open the edit panel">
+    Click the edit button on the user's row to enter edit mode.
+  </Step>
+  <Step title="Review the documents">
+    Check the `verification_front_url` and `verification_back_url` stored on the profile to view the submitted documents. Open these URLs directly to inspect the images.
+  </Step>
+  <Step title="Update verification status">
+    Set `verification_status` to `verified` to approve, or `rejected` to decline. The `is_verified` boolean field should also be updated to `true` on approval.
+  </Step>
+  <Step title="Save the changes">
+    Click the save icon to commit the updated status to the database.
+  </Step>
+</Steps>
+
+## Resetting a user's password
+
+Click the lock icon on any user row to reset their login password. You will be prompted to enter a new temporary password. The change is applied immediately through the admin auth override endpoint.
+
+## Resetting or advancing a user's task set
+
+Two quick-action buttons are available on each user row:
+
+- **Hard reset** (red refresh icon) — resets the user to Set 1, clears `completed_count`, zeroes `profit`, and restores the welcome bonus balance as defined in site settings.
+- **Advance set** (blue lightning icon) — increments `current_set` by 1, pushing the user forward to the next task set without resetting their balance.
+
+Both actions require confirmation before executing.
+
+## Deleting a user
+
+Click the trash icon on a user row and confirm the prompt to permanently delete the account. This removes both the profile record and the authentication credentials.
+
+<Warning>
+User deletion is irreversible. It removes all account data and auth credentials. The user will not be able to recover their account.
+</Warning>

@@ -1,0 +1,117 @@
+---
+title: 'Privacy & data'
+description: 'How SmartBugMedia collects, uses, protects, and retains your personal data, and what rights you have over your information.'
+---
+
+<Info>
+  By using SmartBugMedia you confirm that you are at least 18 years of age and agree to the data practices described on this page.
+</Info>
+
+## Data we collect
+
+SmartBugMedia collects the minimum personal information necessary to operate the platform securely and deliver its services. The following categories of data are collected:
+
+**Account and profile data**
+- Username, display name, email address, and phone number provided during registration.
+- Your selected language and currency preferences.
+- Your referral code and the referral code used when you registered (if any).
+- Avatar image, if uploaded.
+
+**Financial and transaction data**
+- Wallet balance, profit, total earnings, referral earnings, and freeze balance (as tracked in your `Profile`).
+- Wallet address and withdrawal wallet address.
+- Full transaction history: deposits, withdrawals, commissions, freeze and unfreeze events, including amounts, statuses, and timestamps.
+
+**Task activity data**
+- Completed task count, current set number, and last reset timestamp.
+- Individual task records including earned amounts, task status, and completion timestamps.
+- Pending bundle task state.
+
+**Identity verification data**
+- Document type selected (national ID, passport, or driver's license).
+- Front and back images of your verification document (`verification_front_url`, `verification_back_url`).
+- Verification status: unverified, pending, verified, or rejected.
+
+**Security credentials**
+- Hashed login password, hashed withdrawal password, and hashed security PIN. These are never stored or transmitted in plain text.
+
+**Technical and session data**
+- Session tokens used to maintain your authenticated session.
+- Basic usage data required to detect fraud or unauthorized access.
+
+## How we use your data
+
+Your data is used exclusively for the following purposes:
+
+- **Account management**: Creating and maintaining your account, authenticating your identity at login, and processing account-level settings changes.
+- **Task matching and execution**: Assigning tasks appropriate to your VIP tier, tracking set progress, and calculating earned commissions.
+- **Transaction processing**: Verifying deposits, processing withdrawal requests, crediting referral commissions, and maintaining an auditable transaction ledger.
+- **Identity verification**: Reviewing your submitted documents to confirm your identity before approving withdrawals.
+- **Security and fraud prevention**: Detecting unauthorized access, enforcing the one-account-per-person policy, and protecting platform integrity.
+- **Customer support**: Investigating account issues, resolving disputes, and responding to your inquiries.
+
+<Note>
+  SmartBugMedia does not sell your personal data to third parties or use it for commercial advertising purposes.
+</Note>
+
+## Data security
+
+SmartBugMedia applies multiple layers of security to protect your data:
+
+**Row-Level Security (RLS)**
+All user data in the database is governed by Row-Level Security policies. This means each user can only read and write their own records — no user can access another user's profile, transaction history, or verification documents through any API call.
+
+**Encrypted sessions**
+Authentication sessions use encrypted session tokens. Tokens are rotated on login and invalidated on logout. Your login password, withdrawal password, and security PIN are stored using one-way cryptographic hashing and are never recoverable in plain text.
+
+**Separation of credentials**
+Three separate credentials protect your account: your login password, your withdrawal password, and your security PIN. This ensures that compromising one credential alone is not sufficient to authorize financial transactions.
+
+**Blockchain transaction infrastructure**
+USDT transactions are processed on public blockchain networks (TRC-20 / ERC-20), providing tamper-resistant transaction verification and transparent, auditable financial records.
+
+<Warning>
+  You are responsible for safeguarding your credentials. SmartBugMedia support staff will never ask for your password, withdrawal password, or security PIN.
+</Warning>
+
+## Identity verification data handling
+
+Verification documents (front and back images of your ID) are uploaded and stored securely. Access to these files is restricted:
+
+- Document images are stored at unique, non-guessable URLs (`verification_front_url`, `verification_back_url`).
+- Access is limited to authorized verification reviewers and is governed by Row-Level Security.
+- Documents are used solely to confirm your identity before processing your first withdrawal.
+- After verification is complete, document images are retained for compliance and fraud prevention purposes.
+
+If your verification is rejected, you will be notified and given the opportunity to resubmit corrected documents.
+
+## Data retention
+
+| Data category                    | Retention period                                      |
+|----------------------------------|-------------------------------------------------------|
+| Account and profile data         | Retained for the lifetime of your account             |
+| Transaction records              | Retained indefinitely for financial audit purposes    |
+| Task activity records            | Retained for the lifetime of your account             |
+| Identity verification documents  | Retained after verification for compliance purposes   |
+| Session tokens                   | Invalidated on logout; expired tokens are purged      |
+
+If you request account deletion, your profile data and task history will be removed from active systems. Transaction records may be retained for legal and compliance obligations.
+
+## Your rights
+
+You have the right to:
+
+- **Access** the personal data held about your account by contacting support.
+- **Correct** inaccurate account details through your account settings or by contacting support.
+- **Request deletion** of your account and associated personal data, subject to retention obligations described above.
+- **Withdraw consent** for non-essential data processing by adjusting your notification preferences in account settings.
+
+<Note>
+  You are responsible for complying with tax reporting obligations in your jurisdiction. SmartBugMedia provides downloadable transaction records to assist with this. The platform does not provide tax, legal, or financial advice.
+</Note>
+
+## Reporting privacy concerns
+
+If you believe your data has been misused, or if you observe suspicious behavior involving your account or the SmartBugMedia platform, contact the support team immediately through the official in-platform support channel. Include a written description of the issue and any relevant screenshots.
+
+For general privacy inquiries, reach out to the support team through the platform. SmartBugMedia does not accept privacy requests submitted through unofficial channels.

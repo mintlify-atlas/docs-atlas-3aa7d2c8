@@ -1,0 +1,108 @@
+---
+title: "Bundle management"
+description: "How to create, assign, and manage bundled package orders in the SmartBugMedia admin panel."
+---
+
+The Bundles page (`/admin/bundles`) manages special high-value task orders that can be assigned to individual users. When a bundle is active for a user, it interrupts their normal task set at a specific task number and presents a purchase order requiring additional capital. Completing the bundle earns the user a bonus reward.
+
+## What bundles are
+
+A bundle is a targeted financial event injected into a user's task flow. At a configured task index (e.g., task 35 out of 40), the user encounters a product that requires them to deposit additional funds to continue. In exchange for completing the bundle, the user receives a bonus amount on top of the transaction value.
+
+Bundles are used to prompt users to increase their balance at key moments in their task set.
+
+## Bundle fields
+
+| Field             | Description                                                                          |
+| ----------------- | ------------------------------------------------------------------------------------ |
+| `name`            | Bundle name shown to the user (e.g., "Special Bundle Package")                       |
+| `description`     | Short description of the bundle shown in the modal                                   |
+| `shortageAmount`  | The additional funds the user must deposit to proceed (auto-calculated as `totalAmount - walletBalance`) |
+| `totalAmount`     | The total cost of the bundle transaction (the product value)                         |
+| `bonusAmount`     | The reward the user earns for completing the bundle                                  |
+| `rate`            | Bonus expressed as a rate relative to `totalAmount`                                  |
+| `targetIndex`     | Which task number in the set triggers the bundle modal (e.g., `35` = 35th task)      |
+| `expiresIn`       | Time limit for accepting the bundle, in seconds (default: `86400` = 24 hours)        |
+| `taskItem`        | The primary product associated with the bundle                                       |
+| `taskItems`       | Up to 2 products that can be injected as the bundle task                             |
+
+## Bundle catalog
+
+The **Product catalog** section stores reusable bundle templates. You can create catalog entries to pre-configure bundles and reference them when assigning to users.
+
+### Creating a catalog bundle
+
+Click **New catalog item** to open the creation form. Fill in:
+
+- **Name** — identifier for the bundle template
+- **Threshold** (`total_amount`) — the bundle's product cost
+- **Yield** (`bonus_amount`) — the reward the user receives
+- **Rate** — bonus as a percentage of total amount (auto-calculates with yield)
+
+Click **Initialize config** to save.
+
+### Editing a catalog bundle
+
+Click the pencil icon on any catalog row to open its edit form inline. Update the fields and click **Initialize config** to save.
+
+## Assigning a bundle to a user
+
+The **Active deployment** panel on the left side of the page handles direct user assignment.
+
+<Steps>
+  <Step title="Select the target user">
+    Click **Find an agent...** to open the user dropdown. Search by username to narrow the list. Users who already have a pending bundle are marked with a star icon.
+  </Step>
+  <Step title="Select the task product(s)">
+    In the **Injection targets** list, select up to 2 products from the task item catalog. These are the products that will appear as the bundle task. Filter by VIP level or search by name to find the right product.
+  </Step>
+  <Step title="Set the bundle total">
+    Enter the **Bundle total** — the USD value of the product the user must fund. The system will auto-calculate the `shortageAmount` as `totalAmount - userWalletBalance`.
+  </Step>
+  <Step title="Set the task hit index">
+    Enter the **Task hit index** — the task number in the user's current set where the bundle will trigger. Common values are 30–38 to trigger late in a set. Valid range is 1–40.
+  </Step>
+  <Step title="Choose the commission override">
+    Select a bonus preset to determine how much reward the user receives:
+    - **30% / 50% / 100% / 150% / 200%** — percentage of `totalAmount`
+    - **$50 fix / $100 fix / $500 fix** — fixed bonus amounts
+    - **Custom %** — enter a custom percentage rate
+    - **Custom $** — enter a fixed dollar amount
+  </Step>
+  <Step title="Review the impact summary">
+    The **Agent deficit** shows how much additional deposit the user will need. The **Agent profit** shows the bonus they will earn on completion.
+  </Step>
+  <Step title="Deploy the bundle">
+    Click **Deploy special bundle**. The bundle is written to the user's `pending_bundle` field and will trigger at the configured task index.
+  </Step>
+</Steps>
+
+<Warning>
+Assigning a bundle to a user whose wallet balance is already sufficient will result in a `shortageAmount` of $0. The user will still see the bundle modal but will not need to deposit additional funds. Verify the user's balance before assigning.
+</Warning>
+
+## Bundle lifecycle
+
+| State          | Description                                                              |
+| -------------- | ------------------------------------------------------------------------ |
+| Assigned       | Bundle is stored in `pending_bundle` on the user's profile; not yet triggered |
+| Triggered      | User has reached the `targetIndex` task; the bundle modal appears        |
+| Accepted       | User has accepted and funded the bundle; task is now `is_bundle = true` in `user_tasks` |
+| Declined       | User declined the bundle or it expired; `pending_bundle` is cleared      |
+| Completed      | Bundle task is marked complete; bonus is credited to the user's wallet   |
+
+## Deployment queue
+
+The **Deployment queue** table shows all users who currently have a pending or accepted bundle. For each queued user you can see:
+
+- Username and VIP level
+- Current task progress in the set
+- Hit index (the task that will trigger the bundle)
+- Bundle value and reward amount
+- Whether the bundle has been accepted (shown as "ACCEPTED" in green)
+
+Click the pencil icon to adjust an unaccepted bundle's parameters. Click the trash icon to clear the bundle from the user without completing it.
+
+## Clearing a bundle
+
+To remove a bundle from a user before it is accepted, click the trash icon on their row in the deployment queue. This clears `pending_bundle` from the user's profile and cancels any associated pending bundle tasks.

@@ -1,0 +1,79 @@
+---
+title: "Platform settings"
+description: "How to configure site-wide settings including operational toggles, financial parameters, wallet addresses, and branding in the SmartBugMedia admin panel."
+---
+
+The Settings page (`/admin/settings`) controls global platform configuration. Changes here affect all users immediately. Settings are persisted via the `/api/admin/site-settings` endpoint and stored in the `site_settings` table as key-value pairs.
+
+Click **Commit configuration** to save all pending changes at once. Some fields (such as language and currency) save automatically on selection.
+
+<Warning>
+Settings changes take effect immediately for all users. Test changes carefully, especially operational toggles like maintenance mode or deposit/withdrawal enable states.
+</Warning>
+
+## Operational toggles
+
+The **Operational core** section contains live kill-switches that control platform availability:
+
+| Setting                      | Key                           | Effect when disabled                              |
+| ---------------------------- | ----------------------------- | ------------------------------------------------- |
+| Maintenance mode             | `maintenance_mode`            | Locks the site for all users                      |
+| Registrations                | `new_registrations_enabled`   | Prevents new user sign-ups                        |
+| Deposits (top-up)            | `deposits_enabled`            | Disables the deposit flow for all users           |
+| Withdrawals (payout)         | `withdrawals_enabled`         | Disables the withdrawal flow for all users        |
+
+Toggle each switch to enable or disable. Changes are saved when you click **Commit configuration**.
+
+## Financial parameters
+
+The **Wealth calibration** section controls monetary limits and commission rates:
+
+| Setting                  | Key                        | Description                                           |
+| ------------------------ | -------------------------- | ----------------------------------------------------- |
+| Minimum deposit          | `min_deposit`              | Minimum deposit amount accepted (USD)                 |
+| Minimum withdrawal       | `min_withdrawal`           | Minimum withdrawal amount allowed (USD)               |
+| L1 referral commission   | `referral_commission_l1`   | Commission rate for direct referrals (%)              |
+| L2 referral commission   | `referral_commission_l2`   | Commission rate for second-level referrals (%)        |
+| L3 referral commission   | `referral_commission_l3`   | Commission rate for third-level referrals (%)         |
+| Referral signup bonus    | `signup_bonus`             | One-time bonus paid when a referred user signs up (USD) |
+| Initial node capital     | `welcome_bonus`            | Starting balance given to new users and on hard reset (USD) |
+| Reward tier 1–6          | `reward_tier_1` – `reward_tier_6` | Milestone reward thresholds (required amount / bonus USD) |
+
+## Platform receiving wallets
+
+Configure the wallet addresses users send funds to when making deposits. These are displayed to users on the deposit screen.
+
+| Setting             | Key              | Network                  |
+| ------------------- | ---------------- | ------------------------ |
+| TRC20 address       | `wallet_trc20`   | Tron network (USDT)      |
+| ERC20 address       | `wallet_erc20`   | Ethereum network         |
+| BTC address         | `wallet_btc`     | Bitcoin                  |
+| BEP20 address       | `wallet_bep20`   | BNB Smart Chain          |
+
+## Default currency and language
+
+- **Default platform language** (`default_language`) — sets the fallback language for the platform UI. Options include English, Spanish, French, Chinese, Arabic, and others.
+- **Default protocol currency** (`default_currency`) — sets the base currency displayed throughout the platform. Supports USD, EUR, GBP, and over 20 others including crypto (BTC).
+
+Both fields save automatically when a new option is selected from the dropdown.
+
+## Branding and contact
+
+The **Identity shards** section controls platform branding and support links:
+
+| Setting               | Key                   | Description                                    |
+| --------------------- | --------------------- | ---------------------------------------------- |
+| Platform headline     | `site_name`           | The name displayed throughout the UI           |
+| WhatsApp              | `whatsapp_url`        | WhatsApp number or link for user support       |
+| Telegram              | `telegram_url`        | Telegram URL for user support                  |
+| Tawk.to property ID   | `tawkto_property_id`  | Live chat widget integration (property ID)     |
+| Tawk.to widget ID     | `tawkto_widget_id`    | Live chat widget integration (widget ID)       |
+
+## Legal information
+
+The **Legal nodes** section stores entity details used in legal pages and footers:
+
+| Setting          | Key                 | Description                              |
+| ---------------- | ------------------- | ---------------------------------------- |
+| Entity name      | `platform_name`     | Legal business name                      |
+| Entity address   | `platform_address`  | Registered business address              |

@@ -1,24 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
-  "name": "SmartBugMedia",
+  "projectType": "saas",
+  "projectName": "SmartBugMedia",
+  "projectDescription": "A full-stack task-based marketplace optimization platform where agents complete product review tasks to earn USDT rewards, with VIP tier progression, wallet management, and a referral system.",
   "theme": "luma",
-  "colors": {
-    "primary": "#53ad8b",
-    "light": "#53ad8b",
-    "dark": "#0c212a"
-  },
-  "favicon": "https://media.brand.dev/bfafadaa-8c1f-4fd8-90d0-4f196a54e4f6.jpg",
-  "navbar": {
-    "primary": {
-      "type": "github",
-      "href": "https://github.com/meekmill24/nodeflow"
-    }
-  },
-  "footer": {
-    "socials": {
-      "github": "https://github.com/meekmill24/nodeflow"
-    }
-  },
+  "primaryColor": "#53ad8b",
+  "lightColor": "#0c212a",
+  "darkColor": null,
   "navigation": {
     "tabs": [
       {
@@ -92,5 +79,30 @@
         ]
       }
     ]
-  }
+  },
+  "keyFeatures": [
+    "Task-based earning system with product review optimization",
+    "VIP tier progression with increasing commission rates (0.4%–1.0%)",
+    "Integrated USDT wallet with deposits and withdrawals",
+    "Referral network with 20% commission on referred users' earnings",
+    "Real-time dashboard with task progress tracking",
+    "Bundled package system for accelerated earnings",
+    "Multi-language and multi-currency support",
+    "Admin panel for user, task, and transaction management",
+    "Identity verification system for withdrawal eligibility",
+    "Row-Level Security via Supabase for data protection"
+  ],
+  "publicApiSurface": [
+    "GET /api/tasks — Fetch available tasks (authenticated)",
+    "POST /api/tasks — Create new task (admin only)",
+    "GET /api/transactions — Fetch transaction history",
+    "POST /api/transactions — Record new transaction",
+    "GET /api/profile — Fetch user profile",
+    "PUT /api/profile — Update user profile",
+    "POST /api/auth/login — User authentication",
+    "POST /api/auth/sign-up — User registration",
+    "GET /api/product-pool — Fetch task item pool",
+    "POST /api/admin/* — Admin management endpoints",
+    "RPC complete_user_task — Supabase stored procedure for task completion"
+  ]
 }

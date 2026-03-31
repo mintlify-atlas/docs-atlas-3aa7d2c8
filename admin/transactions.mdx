@@ -1,0 +1,115 @@
+---
+title: "Transaction management"
+description: "How to view, filter, and process deposits, withdrawals, and other financial transactions in the SmartBugMedia admin panel."
+---
+
+The Transactions page (`/admin/transactions`) is the platform's financial ledger. It displays all transaction records across every user and provides tools for approving and rejecting deposits and withdrawals.
+
+Deposits and withdrawals each have their own dedicated pages (`/admin/deposits` and `/admin/withdrawals`) for focused processing. The Transactions page is a unified audit view.
+
+## Transaction types
+
+| Type         | Description                                         |
+| ------------ | --------------------------------------------------- |
+| `deposit`    | User funds added to wallet balance                  |
+| `withdrawal` | User funds disbursed from wallet balance            |
+| `commission` | Earnings from completed tasks                       |
+| `freeze`     | Balance placed in the freeze/escrow state           |
+| `unfreeze`   | Balance released from the freeze state              |
+
+### Transaction statuses
+
+| Status     | Meaning                              |
+| ---------- | ------------------------------------ |
+| `pending`  | Awaiting admin review and action     |
+| `approved` | Transaction confirmed and processed  |
+| `rejected` | Transaction declined by admin        |
+
+## Viewing all transactions
+
+The Transactions page loads all platform transactions and displays them in a table showing user, type, amount, proof URL (for deposits), description, and timestamp.
+
+Summary stats at the top show:
+
+- **Total turnover** — sum of all transaction amounts
+- **Net liquidity** — deposits minus withdrawals
+- **Referral yield** — total referral commission transactions
+- **Peak transaction** — the single largest transaction recorded
+
+## Filtering transactions
+
+Use the search bar to find transactions by username or description. Use the type filter dropdown to narrow results to a specific category:
+
+- Global ledger (all types)
+- Deposits only
+- Withdrawals only
+- Referral commissions
+- Task commissions
+- Other commissions
+- Hold / freeze
+
+## Managing deposits
+
+Deposit requests appear on the dedicated Deposits page (`/admin/deposits`). Users submit a deposit along with a proof image (payment screenshot or receipt) stored as a `proof_url`. Each pending deposit must be reviewed and either approved or rejected.
+
+Use the status filter tabs (All, Pending, Approved, Rejected) to focus the view.
+
+### Deposit approval workflow
+
+<Steps>
+  <Step title="Go to the Deposits page">
+    Navigate to `/admin/deposits`. Pending deposits are highlighted with a pulsing status badge.
+  </Step>
+  <Step title="Review the proof">
+    Click **View proof** on the deposit row to open the user's submitted payment evidence in a new tab. Verify that the amount and payment details match the request.
+  </Step>
+  <Step title="Check the beneficiary">
+    Confirm the user's username and current wallet balance shown in the row.
+  </Step>
+  <Step title="Approve or reject">
+    Click the checkmark button to approve the deposit or the X button to reject it. Approving updates the user's `wallet_balance` by the deposit amount. Rejecting marks the transaction without crediting the wallet.
+  </Step>
+</Steps>
+
+<Note>
+A deposit can only be processed once. Once a transaction moves from `pending` to `approved` or `rejected`, it cannot be reprocessed.
+</Note>
+
+## Managing withdrawals
+
+Withdrawal requests appear on the Withdrawals page (`/admin/withdrawals`). When a user submits a withdrawal request, it is logged as a pending transaction with the user's `withdrawal_wallet_address` and `wallet_network` attached. You must verify the destination address before approving.
+
+### Withdrawal approval workflow
+
+<Steps>
+  <Step title="Go to the Withdrawals page">
+    Navigate to `/admin/withdrawals`. Pending withdrawals show with a pulsing status badge.
+  </Step>
+  <Step title="Verify the wallet address">
+    Each row displays the user's withdrawal wallet address (from `withdrawal_wallet_address`) and network (`wallet_network`). Confirm these are correct before sending funds.
+  </Step>
+  <Step title="Confirm the amount">
+    The amount shown is what the user requested. Check that it does not exceed their available balance.
+  </Step>
+  <Step title="Process the payout externally">
+    Send the funds to the displayed wallet address through your payment provider or crypto wallet.
+  </Step>
+  <Step title="Approve the withdrawal">
+    Click the checkmark button to mark the withdrawal as approved. This updates the transaction status to `approved` and deducts the amount from the user's wallet balance.
+  </Step>
+  <Step title="Reject if needed">
+    If the request cannot be fulfilled (invalid address, insufficient funds, fraud), click the X button to reject. Rejected withdrawals refund the frozen amount back to the user's available balance.
+  </Step>
+</Steps>
+
+<Warning>
+Approving a withdrawal in the admin panel does not automatically transfer funds — it only records the approval and updates the database. You must send the funds externally before or after marking it approved.
+</Warning>
+
+## Deleting a transaction record
+
+On the Transactions page, hovering over a row reveals a delete button. Use this to remove erroneous records.
+
+<Warning>
+Deleting a transaction record does **not** reverse any financial impact on the user's wallet balance. Only remove records that were created in error and have not affected any balance.
+</Warning>
